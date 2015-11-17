@@ -1,22 +1,29 @@
 from UserDispatcher import UserDispatcher
-from Utils import Utils
+from Session import Session
 import os
+import json 
 class Data:
 	def __init__(self,userId,device=None):
 		_userDispatcher = UserDispatcher()
-		self._dataFolder = "../data"
+		self._dataFolder = "data/"
 		self.userId = userId
 		self.user = _userDispatcher.get(userId,False)
 		self.device = device 
 		#if there is no provided device, fallback to the first device
 		if(self.device == None):
 			self.device = self.user.devices[0]
-	def getSessions(self,json=True):
+	def getSessions(self,_json=True):
+		_availableSessions = {"sessions":[]}
 		for _folder in os.listdir(self._dataFolder):
 			if self.device in _folder: #get only the folders from his/her device
-				print _folder
-	def getDataFromSession(self,session,signalType):
-		_file = self._dataFolder +"/"+session+"/"+signalType+".csv"
-		return Utils.parseFile(_file,signalType)
+				_availableSessions["sessions"].append(_folder)
+		if(_json):
+			return json.dumps(_availableSessions)
+		else:
+			return _availableSessions
+	def getDataFromSession(self,session,signalType,_json=True):
+		_file = self._dataFolder +session
+		_d = Session(_file)
+		return _d.getData(signalType)
 	def getDataByDate(self,session,signals):
 		pass
