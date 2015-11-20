@@ -1,0 +1,179 @@
+<html>
+	<style>
+		#bar{
+			background:#A30732;
+			color:white;
+			height:40px;
+			font-size:20px;
+			box-shadow: 3px 3px 3px #888888;
+			width:100%;
+		}
+		#bar *{
+			padding-left:15px;
+			display: inline-block;
+			vertical-align: middle;
+			height:100%;
+		}
+		#bar #logo{
+			padding-top:5px;
+			font-weight: 100;
+		}
+		#bar #logout{
+			margin-right:0;
+			float:right;
+			height:25px;
+		}
+		#bar #logout #lb{
+			width:25px;
+			height:25px;
+			margin-top:7px;
+			cursor:pointer;
+			background: url("../../../../static/logout.png");
+			background-repeat:no-repeat;
+			background-size: 25px 25px;
+		}	
+		#bar #logout #lb:hover{
+			width:25px;
+			height:25px;
+			margin-top:7px;
+			cursor:pointer;
+			background: url("../../../../static/logout_white.png");
+			background-repeat:no-repeat;
+			background-size: 25px 25px;
+		}
+		body {
+			margin:0;
+			padding:0;
+			font-family: "Lato","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			background:#E3E1E1;
+			overflow:scroll;	
+		}	
+		.empaticabox_session{
+			background:white;
+			box-shadow: 3px 3px 3px #888888;
+			border-radius:5px;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+			margin-top:15px;
+		}
+		.empaticabox_session *{
+			text-align:center;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+		}
+		.empaticabox_feed_title {
+			padding-top:5px;
+			height:35px;
+		}
+		.empaticabox_session input{
+			width:70%;
+			height:35px;
+			font-size:large;
+		}
+		.empaticabutton{
+			background:#A30732;
+			height:25px;
+			width:55px;
+			color:white;
+			border-radius:1px;
+			box-shadow:1px 1px 1px #888888;
+			margin-right:53px;
+			-webkit-user-select: none;  
+			-moz-user-select: none;    
+			-ms-user-select: none;      
+			user-select: none;
+		}
+		.empaticabutton:hover{
+			background:#BC204B;
+			cursor:pointer;
+		}
+		.empaticabox_session .empaticabox_session_maincontainer{
+			height:80px;
+		}	
+		.empaticabox_session:hover{
+			background-color:#BC204B;
+			color:white;
+			cursor:pointer;
+
+		}
+		.empaticabox_session .empaticabox_session_maincontainer .empaticabox_session_mainData1{
+			float:left;
+			width:50%;
+			padding-top:15%;
+			font-size:xx-large;
+			text-align:center;
+			display:inline;
+		}
+		.empaticabox_session .empaticabox_session_maincontainer .empaticabox_session_mainData2{
+			width:40%;
+			float:right;
+			font-size:xx-large;
+			padding-top:3%;
+			display:inline;
+		}
+		.empaticabox_session .empaticabox_session_statistics * {
+			display:inline;
+		}
+		.empaticabox_session .empaticabox_session_statistics{
+			margin-bottom:0;
+			margin: 50px auto -155px; 
+			width:100%;
+			color:gray;
+		}
+		.empaticabox_feed_container{
+			margin-left:auto;
+			margin-right:auto;
+			width:70%;
+			float:right;
+			overflow:scroll;
+
+		}
+		.empaticabox_session_date{
+			font-size:small;
+			margin-top:15px;
+		}	
+		.userdata{
+			float:left;
+			width:30%;
+			overflow:scroll;
+		}	
+		.userdata *{
+			margin-left:25px;
+			margin-top:25px;
+			overflow:hidden;
+		}
+		.userdata #userdata_name{
+			font-size:xx-large;
+		}
+		.empaticabox_session_date, .empaticabox_session_title{
+			margin-left: auto;
+			margin-right: auto;
+			width:350px;
+		}
+		.empaticabox_session_title{
+			font-size:xx-large;
+		}
+		#content{
+			overflow:scroll;	
+		}
+	</style>
+	<body>
+		<header id="bar">
+			<span id="logo">Empatica Dashboard</span>
+			<span id="logout"><div id="lb"/></span>
+		 </header>
+		<div id="content">
+			<div class="userdata">
+				<img src="../../../../static/me.png"/>
+				<div id="userdata_name">{{user.name}} </div>
+				<div id="userdata_name">{{_sessionHR}} </div>
+			</div>
+			<div class="empaticabox_feed_container">
+
+			</div>
+		
+		</div>
+	</body>
+	</html>
