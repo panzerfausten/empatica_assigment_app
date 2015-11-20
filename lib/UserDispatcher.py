@@ -1,8 +1,8 @@
 import json
 class UserDispatcher:
 	def __init__(self):
-		_u1 =  User(1,"Darien",26,["95f412","40bba7"])
-		_u2 =  User(2,"Darien",26,["95f412","40bba7"])
+		_u1 =  User(1,"Darien Miranda",26,["95f412","40bba7"])
+		_u2 =  User(2,"Alberto Bojorquez",26,["efbaa7","57bba7"])
 		self.users = {1:_u1,2:_u2}
 	
 	def get(self,userId,json=True):

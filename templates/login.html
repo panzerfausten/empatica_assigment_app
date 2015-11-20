@@ -1,2 +1,93 @@
 <html>
+	<style>
+		#bar{
+			background:#A30732;
+			color:white;
+			height:40px;
+			font-size:20px;
+			box-shadow: 3px 3px 3px #888888;
+		
+		}
+                #bar #logo{
+                        padding-top:5px;
+                        font-weight: 100;
+                }
+                #bar #logo img{
+                        height:25px;
+                        margin-right:5px;
+                }
+		#bar *{
+			padding-left:15px;
+			display: inline-block;
+			vertical-align: middle;
+			height:100%;
+		}
+		#bar #logo{
+			padding-top:5px;
+			font-weight: 100;
+		}
+		body {
+			margin:0;
+			padding:0;
+			font-family: "Lato","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			background:#E3E1E1;
+		}	
+		.empaticabox_login{
+			background:white;
+			box-shadow: 3px 3px 3px #888888;
+			border-radius:5px;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+			margin-top:20%;
+		}
+		.empaticabox_login *{
+			text-align:center;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+		}
+		.empaticabox_title {
+			padding-top:5px;
+			height:35px;
+		}
+		.empaticabox_login input{
+			width:70%;
+			height:35px;
+			font-size:large;
+		}
+		.empaticabutton{
+			background:#A30732;
+			height:25px;
+			width:55px;
+			color:white;
+			border-radius:1px;
+			box-shadow:1px 1px 1px #888888;
+			margin-right:53px;
+			-webkit-user-select: none;  
+			-moz-user-select: none;    
+			-ms-user-select: none;      
+			user-select: none;
+		}
+		.empaticabutton:hover{
+			background:#BC204B;
+			cursor:pointer;
+		}
+	</style>
+	<head>
+	</head>
+	<body>
+		<header id="bar">
+			<span id="logo"><img src="../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
+		 </header>
+		<div id="content">
+			<div class="empaticabox_login" style="height:150px;width:350px;">
+				<div class="empaticabox_title">Welcome! Please enter your details below</div>
+				<input type="text"  placeholder="e-mail" required></br>
+				<input type="password"  placeholder="password" required>
+				<div class="empaticabutton" style="margin-top:5px; ">Login<div>
+			</div>
+		
+		</div>
+	</body>
 </html>

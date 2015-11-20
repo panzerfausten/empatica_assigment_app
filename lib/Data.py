@@ -13,10 +13,16 @@ class Data:
 		if(self.device == None):
 			self.device = self.user.devices[0]
 	def getSessions(self,_json=True):
-		_availableSessions = {"sessions":[]}
+		_availableSessions = {"sessions":[],"count":0}
+		_nSessions = 0 
 		for _folder in os.listdir(self._dataFolder):
 			if self.device in _folder: #get only the folders from his/her device
-				_availableSessions["sessions"].append(_folder)
+				_file = self._dataFolder + _folder 
+				_d = Session(_file)
+				_availableSessions["sessions"].append(_d.getMetaDataOnly())
+				_nSessions += 1
+		_availableSessions["count"] = _nSessions
+
 		if(_json):
 			return json.dumps(_availableSessions)
 		else:

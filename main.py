@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from lib.UserDispatcher import UserDispatcher
 from lib.Data import Data
 app = Flask(__name__)
@@ -13,10 +14,12 @@ def users(_userId):
 def devices(_userId):
 	u = UserDispatcher()
 	return u.getDevices(_userId)
+
 @app.route("/api/users/<int:_userId>/data")
 def data(_userId):
 	return "OK"
-@app.route("/api/users/<int:_userId>/data/sessions")
+
+@app.route("/api/users/<int:_userId>/data/sessions/")
 def sessions(_userId):
 	_d = Data(_userId)
 	return _d.getSessions()
@@ -52,6 +55,23 @@ def sessionTEMP(_userId,_sessionId):
 @app.route("/api/users/<int:_userId>/data/sessions/<string:_sessionId>/tags")
 def sessiontags(_userId,_sessionId):
 	return getData(_userId,_sessionId,"tags")
-
+##app###
+@app.route("/app/login/")
+def login():
+	return render_template("login.html")
+@app.route("/app/user/<int:_userId>/sessions")
+def userSessions(_userId):
+	_d = Data(_userId)
+	_sessions = _d.getSessions(False)
+	u = UserDispatcher()
+	_user = u.get(_userId,False)
+	return render_template("userFeed.html",user = _user,sessions = _sessions)
+@app.route("/app/user/<int:_userId>/sessions/<string:_sessionId>")
+def userSession(_userId,_sessionId):
+	_d = Data(_userId)
+	_sessions = _d.getSessions(False)
+	u = UserDispatcher()
+	_user = u.get(_userId,False)
+	return render_template("sessionData.html",user = _user,_sessionHR = getData(_userId,_sessionId,"HR"))
 if __name__ == '__main__':
     app.run(debug=True)
