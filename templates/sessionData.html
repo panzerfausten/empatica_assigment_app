@@ -1,4 +1,9 @@
 <html>
+  <head>
+    <script src="../../../../static/js/jquery.js"></script>
+    <script src="../../../../static/js/charts.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+  </head>
 	<style>
 		#bar{
 			background:#A30732;
@@ -158,22 +163,47 @@
 		#content{
 			overflow:scroll;	
 		}
+                #bar #logo img{
+                        height:25px;
+                        margin-right:5px;
+                }
+                #sessions_link, #sessions_link:visited, #sessions_link:hover, #sessions_link:active {
+                  color: #D6D6D6;
+			margin-top:8px;
+			font-size:large;
+                        text-decoration:none;
+                }
 	</style>
 	<body>
 		<header id="bar">
-			<span id="logo">Empatica Dashboard</span>
+<span id="logo"><img src="../../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
+			<a id="sessions_link" href="../sessions">Sessions</a>
 			<span id="logout"><div id="lb"/></span>
 		 </header>
 		<div id="content">
 			<div class="userdata">
 				<img src="../../../../static/me.png"/>
 				<div id="userdata_name">{{user.name}} </div>
-				<div id="userdata_name">{{_sessionHR}} </div>
+				<div id="userdata_sessiontime">Time: </div>
+				<div id="userdata_adsas">Device: </div>
+				<div id="userdata_adsas">Sweaty session</div>
+				<div id="userdata_adsas">Signal explanation HR: ranges</div>
+				
 			</div>
 			<div class="empaticabox_feed_container">
-
+				<div id="chart_HR" style="height: 400px; min-width: 100%"></div>
+				<div id="chart_EDA" style="height: 400px; min-width: 100%"></div>
+				<div id="chart_TEMP" style="height: 400px; min-width: 100%"></div>
 			</div>
 		
 		</div>
+		<script>
+			_data = {{_sessionHR}};
+			_dataEDA = {{_sessionEDA}};
+			_dataTEMP = {{_sessionTEMP}};
+			loadHR(_data);
+			loadEDA(_dataEDA);
+			loadTEMP(_dataTEMP);
+		</script>
 	</body>
 	</html>

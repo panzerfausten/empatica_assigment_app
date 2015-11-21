@@ -51,12 +51,6 @@
 		.empaticabox_session, .empaticabox_session:visited, .empaticabox_session:hover, .empaticabox_session:active {
 		  color: black;
 		}
-		#sessions_link, #sessions_link:visited, #sessions_link:hover, #sessions_link:active {
-                  	color: #D6D6D6;
-                        margin-top:8px;
-                        font-size:large;
-                        text-decoration:none;
-		}
 		.empaticabox_session{
 			text-decoration:none;
 			background:white;
@@ -140,8 +134,9 @@
 			margin-left:auto;
 			margin-right:auto;
 			width:70%;
-			float:right;
 			overflow:scroll;
+			background-color:white;
+			margin-top:40px;
 
 		}
 		.empaticabox_session_date{
@@ -154,8 +149,8 @@
 			overflow:scroll;
 		}	
 		.userdata *{
-			margin-left:15px;
-			margin-top:15px;
+			margin-left:25px;
+			margin-top:25px;
 			overflow:hidden;
 		}
 		.userdata #userdata_name{
@@ -176,6 +171,23 @@
 			height:25px;
 			margin-right:5px;
 		}
+		#userdataHolder{
+			width:350px;
+	
+		}
+		table{
+			margin-left:auto;
+			margin-right:auto;
+		}	
+		.th_header{
+			color:white;
+			background-color:#A30732;
+			font-weight: normal;
+
+		}
+		tr:hover{
+			background-color:gray;
+		}	
 	</style>
 	<body>
 		<header id="bar">
@@ -184,50 +196,56 @@
 			<span id="logout"><div id="lb"/></span>
 		 </header>
 		<div id="content">
-			<div class="userdata">
-				<div id="userdataHolder">
-					<img src="../../../static/me.png"/>
-					<div id="userdata_name">{{user.name}} </div>
-					<div id="userdata_sessions">Sessions: {{ sessions["count"] }}</div>
-					<div id="userdata_devices">Your devices: {{ sessions["count"] }}</div>
-				</div>
-			</div>
 			<div class="empaticabox_feed_container">
-				<div class="empaticabox_session_title">
-					Your latest sessions
-				</div>
-				{% for s in sessions.sessions %}
-					<div class="empaticabox_session_date">
-						{{s["session"]["metadata"]["prettyDaysAgo"]}} days ago
-					</div>
-				<a class="empaticabox_session" style="height:150px;width:350px;" href="sessions/{{s["session"]["metadata"]["id"]}}">
-					<div class="empaticabox_session_maincontainer" >
-						<div class="empaticabox_session_mainData1">
-						{{s["session"]["metadata"]["id"][6:10]}}
-						</div>
-						<div class="empaticabox_session_mainData2">
-						<img src="../../../static/time.png"  height="45" width="45"/>
-						{{s["session"]["metadata"]["prettyTime"] }}
-						</div>
-					</div>
-					<footer class="empaticabox_session_statistics">
-						{% if s["session"]["statistics"]["HR_avg"] > 90 %}
-							<img src="../../../static/hr_on.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/hr_off.png"  height="15" width="15"/>
-						{% endif %}
-						{% if s["session"]["statistics"]["EDA_avg"] > 1 %}
-							<img src="../../../static/sweat_off.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/sweat_on.png"  height="15" width="15"/>
-						{% endif %}
-						Device: {{s["session"]["metadata"]["deviceId"]}}
-					</footer>
-				</a>
-				{% endfor %}
-
+				Tests results for device {{_deviceId}}:
+				</br>
+				</br>
+				</br>
+				</br>
+				</br>
+				<table>
+				  <tr>
+				    <th class="th_header">Session ID</th>
+				    <th class="th_header">ACC</th>
+				    <th class="th_header">BVP</th>
+				    <th class="th_header">EDA</th>
+				    <th class="th_header">HR</th>
+				    <th class="th_header">IBI</th>
+				    <th class="th_header">TEMP</th>
+				    <th class="th_header">TestTEMP</th>
+				    <th class="th_header">avgTEMP</th>
+				    <th class="th_header">TestHR</th>
+				    <th class="th_header">avgHR</th>
+				  </tr>
+				    {% for s in _resTests %}
+				  	<tr>
+						<th> </th>
+						<th> {{s["hasACC"]}}</th>
+						<th> {{s["hasBVP"]}}</th>
+						<th> {{s["hasEDA"]}}</th>
+						<th> {{s["hasHR"]}}</th>
+						<th> {{s["hasIBI"]}}</th>
+						<th> {{s["hasTEMP"]}}</th>
+						<th> {{s["statusTEMP"][0]}}</th>
+						<th> {{s["statusTEMP"][1]}}</th>
+						<th> {{s["statusHR"][0]}}</th>
+						<th> {{s["statusHR"][1]}}</th>
+				  	</tr>
+					 {% endfor %}
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				Recomendation: the device failed the TEMP and HR tests. Please ask the customer to record more sessions. If the problem continues replace the device				<a href="../support">Test another device</a>
 			</div>
-		
+			
 		</div>
-	</body>
-	</html>
+		</body>
+		</html>
