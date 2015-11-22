@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 from flask import render_template
 from lib.UserDispatcher import UserDispatcher
 from lib.Data import Data
@@ -59,6 +60,14 @@ def sessionTEMP(_userId,_sessionId):
 @app.route("/api/users/<int:_userId>/data/sessions/<string:_sessionId>/tags")
 def sessiontags(_userId,_sessionId):
 	return getData(_userId,_sessionId,"tags")
+@app.route("/api/login")
+def api_login():
+	if request.method == 'GET':
+		_username = request.args.get("user")
+		_pwd = request.args.get("pwd")
+		_ud = UserDispatcher()
+		return str(_ud.login(_username,_pwd))
+	return _username
 ##app###
 @app.route("/")
 def login():
@@ -87,7 +96,9 @@ def userSession(_userId,_sessionId):
 	except:
 		_sTEMP = []
 	_sEDA =  _sessionEDA["session"]["data"]["EDA"]
-	return render_template("sessionData.html",user = _user,_sessionHR = _sHR,_sessionEDA = _sEDA,_sessionTEMP = _sTEMP,_metadata = _sessionEDA["session"]["metadata"])
+	return render_template("sessionData.html",user = _user,_sessionHR = _sHR,_sessionEDA = _sEDA,_sessionTEMP = _sTEMP,_metadata = _sessionEDA["session"]["metadata"],_session = Session("data/"+_sessionId).getMetaDataOnly())
+
+
 @app.route("/app/support")
 def support():
 	return render_template("support.html")
@@ -97,5 +108,19 @@ def support_device(deviceId):
 	_ds = DeviceStatus(deviceId)
 	_resTests = _ds.doTests(False)
 	return render_template("support_results.html",_resTests = _resTests,_device= deviceId)
+@app.route("/app/god")
+def god():
+	return render_template("god.html")
+
+@app.route("/app/god/users")
+def god_users():
+	u = UserDispatcher()
+	print u.getAll(False)
+	return render_template("god_users.html",_users= u.getAll(False))
+@app.route("/app/god/support/<string:deviceId>")
+def god_support(deviceId):
+	_ds = DeviceStatus(deviceId)
+	_resTests = _ds.doTests(False)
+	return render_template("god_support_results.html",_resTests = _resTests,_device= deviceId)
 if __name__ == '__main__':
     app.run(debug=True)

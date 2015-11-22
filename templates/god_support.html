@@ -1,4 +1,7 @@
-<html>
+<html ng-app>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<head>
 	<style>
 		#bar{
 			background:#A30732;
@@ -50,12 +53,6 @@
 		}	
 		.empaticabox_session, .empaticabox_session:visited, .empaticabox_session:hover, .empaticabox_session:active {
 		  color: black;
-		}
-		#sessions_link, #sessions_link:visited, #sessions_link:hover, #sessions_link:active {
-                  	color: #D6D6D6;
-                        margin-top:8px;
-                        font-size:large;
-                        text-decoration:none;
 		}
 		.empaticabox_session{
 			text-decoration:none;
@@ -154,8 +151,8 @@
 			overflow:scroll;
 		}	
 		.userdata *{
-			margin-left:15px;
-			margin-top:15px;
+			margin-left:25px;
+			margin-top:25px;
 			overflow:hidden;
 		}
 		.userdata #userdata_name{
@@ -176,12 +173,10 @@
 			height:25px;
 			margin-right:5px;
 		}
-                #userdata_sessionMetadata{
-                        font-weight: bold;
-                }
-                #userdata_sessionMetadata div{
-                        font-weight: normal;
-                }
+		#userdataHolder{
+			width:350px;
+	
+		}	
 	</style>
 	<body>
 		<header id="bar">
@@ -191,56 +186,15 @@
 		 </header>
 		<div id="content">
 			<div class="userdata">
-				<div id="userdataHolder">
-					<img src="../../../static/me.png"/>
-					<div id="userdata_name">{{user.name}} </div>
-					<div id="userdata_sessionMetadata">Sessions: 
-
-						<div>{{ sessions["count"] }}</div>
-					</div>
-					<div id="userdata_sessionMetadata">Your devices: 
-						{%for _device in user.devices%}
-						<div>{{ _device}}</div>
-						{%endfor%}
-					</div>
-				</div>
 			</div>
 			<div class="empaticabox_feed_container">
-				<div class="empaticabox_session_title">
-					Your latest sessions
-				</div>
-				{% for s in sessions.sessions %}
-					<div class="empaticabox_session_date">
-						{{s["session"]["metadata"]["prettyDaysAgo"]}} days ago
-					</div>
-				<a class="empaticabox_session" style="height:150px;width:350px;" href="sessions/{{s["session"]["metadata"]["id"]}}">
-					<div class="empaticabox_session_maincontainer" >
-						<div class="empaticabox_session_mainData1">
-						{{s["session"]["metadata"]["id"][6:10]}}
-						</div>
-						<div class="empaticabox_session_mainData2">
-						<img src="../../../static/time.png"  height="45" width="45"/>
-						{{s["session"]["metadata"]["prettyTime"] }}
-						</div>
-					</div>
-					<footer class="empaticabox_session_statistics">
-						{% if s["session"]["statistics"]["HR_avg"] > 90 %}
-							<img src="../../../static/hr_on.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/hr_off.png"  height="15" width="15"/>
-						{% endif %}
-						{% if s["session"]["statistics"]["EDA_avg"] > 5 %}
-							<img src="../../../static/sweat_on.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/sweat_off.png"  height="15" width="15"/>
-						{% endif %}
-						Device: {{s["session"]["metadata"]["deviceId"]}}
-					</footer>
-				</a>
-				{% endfor %}
-
+				Welcome suport team user!
+				<br>Please enter the Empatica device ID to check it status
+				<br><input type="text" ng-model="deviceModel" placeholder="Empatica device ID"></input>			  
+				<a class="empaticabutton" href="support/{% raw %}{{deviceModel}} {% endraw %}">Test</a>
+				<h1>Device: {% raw %} {{deviceModel}} {% endraw %}</h1>
 			</div>
 		
 		</div>
-	</body>
-	</html>
+		</body>
+		</html>

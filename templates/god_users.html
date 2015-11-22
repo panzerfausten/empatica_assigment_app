@@ -1,0 +1,60 @@
+<html ng-app>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}")>
+	<head>
+	<style>
+		#content{
+			margin-top:-25px;
+		}
+	</style>
+	<body>
+		<header id="bar">
+			<span id="logo"><img src="../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
+			<a id="sessions_link" href="">Users</a>
+			<span id="logout"><a href="../../../" id="lb"></a></span>
+		 </header>
+		<div id="content">
+			<div class="empaticabox_feed_container">
+				<h1>Users</h1>
+				This is a list of all the users in the system
+                                </br>
+                                </br>
+                                <table>
+                                  <tr>
+                                    <th class="th_header">Id</th>
+                                    <th class="th_header">Name</th>
+                                    <th class="th_header">User Name</th>
+                                    <th class="th_header">Password</th>
+                                    <th class="th_header">Age</th>
+                                    <th class="th_header">Type</th>
+                                    <th class="th_header">Devices</th>
+                                    <th class="th_header">Sessions</th>
+                                  </tr>
+                                    {% for _user in _users %}
+                                        <tr class="tr_data">
+                                                <th class="th_data"> {{_users[_user].id}}</th>
+                                                <th class="th_data"> {{_users[_user].name}}</th>
+                                                <th class="th_data"> {{_users[_user].username}}</th>
+                                                <th class="th_data"> {{_users[_user].password}}</th>
+                                                <th class="th_data"> {{_users[_user].age}}</th>
+                                                <th class="th_data"> {{_users[_user].type}}</th>
+                                                <th class="th_data">
+
+							{%for _device in _users[_user].devices%}
+								{%if _users[_user].type  == "patient"%}
+									<a href="../../app/god/support/{{_device}}">{{_device}}</a>
+								{%endif%}
+                                         		{% endfor %}
+						</th>
+                                                <th class="th_data"> <a href="../../app/user/{{_users[_user].id}}/sessions" target="_blank">Go</a></th>
+                                        </tr>
+                                         {% endfor %}
+                                </table>
+                                </br>
+                                </br>
+			</div>
+		
+		</div>
+		</body>
+		</html>

@@ -3,6 +3,7 @@
     <script src="../../../../static/js/jquery.js"></script>
     <script src="../../../../static/js/charts.js"></script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/hint.min.css')}}"></link>
   </head>
 	<style>
 		#bar{
@@ -147,7 +148,6 @@
 		.userdata *{
 			margin-left:25px;
 			margin-top:25px;
-			overflow:hidden;
 		}
 		.userdata #userdata_name{
 			font-size:xx-large;
@@ -193,8 +193,21 @@
 				<div id="userdata_sessionMetadata">Date: <div>{{_metadata.prettyDate}} </div></div>
 				<div id="userdata_sessionMetadata">Lenght:<div>{{_metadata.prettyTime}} </div></div>
 				<div id="userdata_sessionMetadata">Device:<div>{{_metadata.deviceId}}</div></div>
-				<div id="userdata_adsas">Signal explanation HR: ranges</div>
-				
+				<div id="userdata_sessionMetadata">Features:
+						<div>
+						{% if _session["session"]["statistics"]["HR_avg"] > 90 %}
+                                                         <a href="javascript:void(0)" class="hint--top" data-hint="This was an agitated session" style:"z-index:99;"><img src="{{ url_for('static', filename='hr_on_big.png')}}"  height="35" width="35"/></a>
+                                                {% else %}
+                                                        <a href="javascript:void(0)" class="hint--top" data-hint="This was a calmed session" style:"z-index:99;"><img src="{{ url_for('static', filename='hr_off_big.png')}}" height="35" width="35"/></a>
+                                                {% endif %}
+
+                                                {% if _session["session"]["statistics"]["EDA_avg"] > 5 %}
+                                                        <a href="javascript:void(0)" class="hint--top" data-hint="This was a sweaty session" style:"z-index:99;"><img src="{{ url_for('static', filename='eda_on_big.png')}}"  height="35" width="35"/></a>
+                                                {% else %}
+                                                        <a href="javascript:void(0)" class="hint--top" data-hint="This was a dry session" style:"z-index:99;"><img src="{{ url_for('static', filename='eda_off_big.png')}}"  height="35" width="35"/></a>
+                                                {% endif %}
+						</div>
+				</div>
 			</div>
 			<div class="empaticabox_feed_container">
 				<div id="chart_HR" style="height: 400px; min-width: 100%"></div>

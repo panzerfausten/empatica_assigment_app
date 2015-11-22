@@ -104,6 +104,7 @@ class Session:
 		_tests["hasTEMP"]  = "OK" if "TEMP" in self._filePaths else "GONE"
 		_tests["statusTEMP"] = self.checkTEMPStatus()
 		_tests["statusHR"] = self.checkHRStatus()
+		_tests["sessionId"] = self._sessionPath.replace("data/","")
 		return _tests
 	def checkTEMPStatus(self):
 		#OK,BAD, UNKNOWN
@@ -116,6 +117,7 @@ class Session:
 					_floatline = map(float,_dataline)
 					_avgD.append(_floatline[0])
 				_avgTEMP = sum(_avgD) / len(_avgD) 
+				_avgTEMP = float("%.2f" %(_avgTEMP))
 				if(_avgTEMP < 50):
 					return ["OK",_avgTEMP]
 				else:
@@ -133,6 +135,7 @@ class Session:
 					_floatline = map(float,_dataline)
 					_avgD.append(_floatline[0])
 				_avgHR = sum(_avgD) / len(_avgD) 
+				_avgHR = float("%.2f" %(_avgHR))
 				if(_avgHR < 40 or _avgHR > 250):
 					return ["BAD",_avgHR]
 				else:

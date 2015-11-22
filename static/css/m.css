@@ -1,5 +1,3 @@
-<html>
-	<style>
 		#bar{
 			background:#A30732;
 			color:white;
@@ -176,71 +174,3 @@
 			height:25px;
 			margin-right:5px;
 		}
-                #userdata_sessionMetadata{
-                        font-weight: bold;
-                }
-                #userdata_sessionMetadata div{
-                        font-weight: normal;
-                }
-	</style>
-	<body>
-		<header id="bar">
-			<span id="logo"><img src="../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
-			<a id="sessions_link" href="">Sessions</a>
-			<span id="logout"><a href="../../../" id="lb"></a></span>
-		 </header>
-		<div id="content">
-			<div class="userdata">
-				<div id="userdataHolder">
-					<img src="../../../static/me.png"/>
-					<div id="userdata_name">{{user.name}} </div>
-					<div id="userdata_sessionMetadata">Sessions: 
-
-						<div>{{ sessions["count"] }}</div>
-					</div>
-					<div id="userdata_sessionMetadata">Your devices: 
-						{%for _device in user.devices%}
-						<div>{{ _device}}</div>
-						{%endfor%}
-					</div>
-				</div>
-			</div>
-			<div class="empaticabox_feed_container">
-				<div class="empaticabox_session_title">
-					Your latest sessions
-				</div>
-				{% for s in sessions.sessions %}
-					<div class="empaticabox_session_date">
-						{{s["session"]["metadata"]["prettyDaysAgo"]}} days ago
-					</div>
-				<a class="empaticabox_session" style="height:150px;width:350px;" href="sessions/{{s["session"]["metadata"]["id"]}}">
-					<div class="empaticabox_session_maincontainer" >
-						<div class="empaticabox_session_mainData1">
-						{{s["session"]["metadata"]["id"][6:10]}}
-						</div>
-						<div class="empaticabox_session_mainData2">
-						<img src="../../../static/time.png"  height="45" width="45"/>
-						{{s["session"]["metadata"]["prettyTime"] }}
-						</div>
-					</div>
-					<footer class="empaticabox_session_statistics">
-						{% if s["session"]["statistics"]["HR_avg"] > 90 %}
-							<img src="../../../static/hr_on.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/hr_off.png"  height="15" width="15"/>
-						{% endif %}
-						{% if s["session"]["statistics"]["EDA_avg"] > 5 %}
-							<img src="../../../static/sweat_on.png"  height="15" width="15"/>
-						{% else %}
-							<img src="../../../static/sweat_off.png"  height="15" width="15"/>
-						{% endif %}
-						Device: {{s["session"]["metadata"]["deviceId"]}}
-					</footer>
-				</a>
-				{% endfor %}
-
-			</div>
-		
-		</div>
-	</body>
-	</html>
