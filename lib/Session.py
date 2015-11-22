@@ -25,6 +25,7 @@ class Session:
 			_endX,_endY,_endZ = map(float,_lines[-1][:-1].split(","))
 			_mdata["metadata"]["endTime"] = _endX
 			_mdata["metadata"]["startX"] = _startX
+			_mdata["metadata"]["prettyDate"] = Utils.toPrettyDate(_startX)
 			_mdata["metadata"]["startY"] = _startY
 			_mdata["metadata"]["startZ"] = _startZ
 			_freqX,_freqY,_freqZ = map(float,_lines[1][:-1].split(","))
@@ -39,6 +40,7 @@ class Session:
 			_startTime = map(float,_lines[0][:-1].split(","))
 			_freq = map(float,_lines[1][:-1].split(","))
 			_mdata["metadata"]["startTime"] = _startTime[0]
+			_mdata["metadata"]["prettyDate"] = Utils.toPrettyDate(_startTime[0])
 			self._startTime = _startTime[0]
 			_mdata["metadata"]["freq"] = _freq[0]
 			_end = self.calcTimeStamp(len(_lines)-1,_freq[0],_startTime[0])
@@ -96,7 +98,7 @@ class Session:
 		_tests = {"hasACC":None,"hasBVP":None,"hasEDA":None,"hasHR":None,"hasIBI":None,"hasTEMP":None}
 		_tests["hasACC"]  = "OK" if "ACC" in self._filePaths else "GONE"
 		_tests["hasBVP"]  = "OK" if "BVP" in self._filePaths else "GONE"
-		_tests["hasEDA"]  = "OK" if "HRA" in self._filePaths else "GONE"
+		_tests["hasEDA"]  = "OK" if "EDA" in self._filePaths else "GONE"
 		_tests["hasHR"]  = "OK" if "HR" in self._filePaths else "GONE"
 		_tests["hasIBI"]  = "OK" if "IBI" in self._filePaths else "GONE"
 		_tests["hasTEMP"]  = "OK" if "TEMP" in self._filePaths else "GONE"
@@ -160,4 +162,3 @@ class Session:
 			return 2
 	def calcTimeStamp(self,_i,_freq,_startTime):
 		return _startTime + (_i / _freq)
-

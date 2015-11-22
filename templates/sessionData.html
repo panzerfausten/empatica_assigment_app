@@ -173,20 +173,26 @@
 			font-size:large;
                         text-decoration:none;
                 }
+		#userdata_sessionMetadata{
+			font-weight: bold;
+		}
+		#userdata_sessionMetadata div{
+			font-weight: normal;
+		}
 	</style>
 	<body>
 		<header id="bar">
 <span id="logo"><img src="../../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
 			<a id="sessions_link" href="../sessions">Sessions</a>
-			<span id="logout"><div id="lb"/></span>
+		 	<span id="logout"><a href="../../../../" id="lb"></a></span>	
 		 </header>
 		<div id="content">
 			<div class="userdata">
 				<img src="../../../../static/me.png"/>
 				<div id="userdata_name">{{user.name}} </div>
-				<div id="userdata_sessiontime">Time: </div>
-				<div id="userdata_adsas">Device: </div>
-				<div id="userdata_adsas">Sweaty session</div>
+				<div id="userdata_sessionMetadata">Date: <div>{{_metadata.prettyDate}} </div></div>
+				<div id="userdata_sessionMetadata">Lenght:<div>{{_metadata.prettyTime}} </div></div>
+				<div id="userdata_sessionMetadata">Device:<div>{{_metadata.deviceId}}</div></div>
 				<div id="userdata_adsas">Signal explanation HR: ranges</div>
 				
 			</div>

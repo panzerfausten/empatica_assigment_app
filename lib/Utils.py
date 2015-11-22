@@ -43,3 +43,7 @@ class Utils:
 					else:
 						_avgs[_x] = _avg
                         return filter(None,_avgs)
+	@staticmethod
+	def toPrettyDate(unixTime):
+		_dt = datetime.fromtimestamp(unixTime)
+		return "%i/%i/%i" %(_dt.day,_dt.month,_dt.year)

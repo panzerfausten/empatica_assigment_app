@@ -1,4 +1,7 @@
-<html>
+<html ng-app>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<head>
 	<style>
 		#bar{
 			background:#A30732;
@@ -187,7 +190,9 @@
 			<div class="empaticabox_feed_container">
 				Welcome suport team user!
 				<br>Please enter the Empatica device ID to check it status
-				<br><input type="text" placeholder="Empatica device ID"></input>			  <div class="empaticabutton">Test</div>
+				<br><input type="text" ng-model="deviceModel" placeholder="Empatica device ID"></input>			  
+				<a class="empaticabutton" href="support/{% raw %}{{deviceModel}} {% endraw %}">Test</a>
+				<h1>Device: {% raw %} {{deviceModel}} {% endraw %}</h1>
 			</div>
 		
 		</div>

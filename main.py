@@ -75,7 +75,6 @@ def userSession(_userId,_sessionId):
 	u = UserDispatcher()
 	_user = u.get(_userId,False)
 	_d = Data(_userId)
-	_sessions = _d.getSessions(False)
 	_sessionEDA = getData(_userId,_sessionId,"EDA",_json=False)
 	try:
 		_sessionHR = getData(_userId,_sessionId,"HR",_json=False)
@@ -88,7 +87,7 @@ def userSession(_userId,_sessionId):
 	except:
 		_sTEMP = []
 	_sEDA =  _sessionEDA["session"]["data"]["EDA"]
-	return render_template("sessionData.html",user = _user,_sessionHR = _sHR,_sessionEDA = _sEDA,_sessionTEMP = _sTEMP)
+	return render_template("sessionData.html",user = _user,_sessionHR = _sHR,_sessionEDA = _sEDA,_sessionTEMP = _sTEMP,_metadata = _sessionEDA["session"]["metadata"])
 @app.route("/app/support")
 def support():
 	return render_template("support.html")
