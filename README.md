@@ -57,6 +57,12 @@ the available users, passwords and roles are:
 | gfreeman@empatica.com | wololo           | doctor     |
 | god@empatica.com      | dioeilmiopastore | god        |
 
+For the support user, you can use the folllowing devices ids to test their status:
+*5f412
+*40bba7
+*fbaa7
+*57bba7
+
 ##issues
 *Webpages are not protected so you can see them if you have the links. 
 *The app was only tested on firefox, please use it :D
