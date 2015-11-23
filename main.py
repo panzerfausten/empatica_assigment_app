@@ -21,9 +21,6 @@ def support_api(_deviceId):
 	_ds = DeviceStatus(_deviceId)
 	_resTests = _ds.doTests()	
 	return _resTests
-@app.route("/api/users/<int:_userId>/data")
-def data(_userId):
-	return "OK"
 
 @app.route("/api/users/<int:_userId>/data/sessions/")
 def sessions(_userId):

@@ -36,7 +36,7 @@ class Session:
 			_mdata["metadata"]["freqZ"] = _freqZ
 			_mdata["metadata"]["prettyTime"] = Utils.secsToHMS(_endX - _startX)
 			_mdata["metadata"]["prettyDaysAgo"] = _utils.daysAgo(_startX)
-		if(_type == "HR" or _type == "EDA" or _type == "BVP"  or _type == "TEMP" or _type == "HR_qi"):
+		if(_type == "HR" or _type == "IBI" or _type == "EDA" or _type == "BVP"  or _type == "TEMP" or _type == "HR_qi"):
 			_startTime = map(float,_lines[0][:-1].split(","))
 			_freq = map(float,_lines[1][:-1].split(","))
 			_mdata["metadata"]["startTime"] = _startTime[0]
@@ -174,7 +174,7 @@ class Session:
 			if(_file == "tags.csv"):
 				self._filePaths["tags"] = _file
 	def cutLine(self,_type):
-		if(_type == "HR" or _type == "EDA" or _type == "BVP"  or _type == "TEMP" or _type == "HR_qi"):
+		if(_type == "HR" or _type=="IBI" or _type == "EDA" or _type == "BVP"  or _type == "TEMP" or _type == "HR_qi"):
 			return 2
 	def calcTimeStamp(self,_i,_freq,_startTime):
 		return _startTime + (_i / _freq)
