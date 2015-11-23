@@ -5,6 +5,7 @@ from lib.UserDispatcher import UserDispatcher
 from lib.Data import Data
 from lib.Session import Session
 from lib.DeviceStatus import DeviceStatus
+import json
 app = Flask(__name__)
 @app.route("/api/users/<int:_userId>")
 def users(_userId):
@@ -107,11 +108,28 @@ def support():
 def support_device(deviceId):
 	_ds = DeviceStatus(deviceId)
 	_resTests = _ds.doTests(False)
-	return render_template("support_results.html",_resTests = _resTests,_device= deviceId)
+	return render_template("support_results.html",_resTests = _resTests,_deviceId= deviceId)
 @app.route("/app/god")
 def god():
 	return render_template("god.html")
 
+@app.route("/app/doctor/<int:doctorId>/")
+def doctor(doctorId):
+	_userId = 1
+        u = UserDispatcher()
+        _doctor = u.get(doctorId,False)
+	_d = Data(_userId)
+	_hm_hr,_hm_eda,_hm_temp  = _d.getHeatMapSessions(True)
+	return render_template("doctor.html",_hm_hr = _hm_hr,_hm_eda=_hm_eda,_hm_temp= _hm_temp, _patientID = _userId, _doctor = _doctor)
+
+@app.route("/app/doctor/<int:doctorId>/patient/<int:patientId>")
+def doctor_patient(doctorId,patientId):
+        u = UserDispatcher()
+        _doctor = u.get(doctorId,False)
+        _cpatient = u.get(patientId,False)
+	_d = Data(patientId)
+	_hm_hr,_hm_eda,_hm_temp  = _d.getHeatMapSessions(True)
+	return render_template("doctor_patient.html",_hm_hr = _hm_hr,_hm_eda=_hm_eda,_hm_temp= _hm_temp, _patientID = patientId, _doctor = _doctor,_cpatient = _cpatient)
 @app.route("/app/god/users")
 def god_users():
 	u = UserDispatcher()
@@ -121,6 +139,6 @@ def god_users():
 def god_support(deviceId):
 	_ds = DeviceStatus(deviceId)
 	_resTests = _ds.doTests(False)
-	return render_template("god_support_results.html",_resTests = _resTests,_device= deviceId)
+	return render_template("god_support_results.html",_resTests = _resTests,_deviceId= deviceId)
 if __name__ == '__main__':
     app.run(debug=True)

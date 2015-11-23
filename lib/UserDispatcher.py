@@ -5,7 +5,8 @@ class UserDispatcher:
 		_u2 =  User(2,"Alberto Bojorquez",26,"aboj@empatica.com","bojo","patient",["efbaa7","57bba7"])
 		_u3 =  User(3,"Mike Rodriguez",32,"mike@empatica.com","rodri","support",[])
 		_u4 =  User(4,"God Juarez",9999999,"god@empatica.com","dioeilmiopastore","god",[])
-		self.users = {1:_u1,2:_u2,3:_u3,4:_u4}
+		_u5 =  User(5,"Dr. Gordon Freeman",39,"gfreeman@empatica.com","wololo","doctor",[],patients =[_u1,_u2])
+		self.users = {1:_u1,2:_u2,3:_u3,4:_u4,5:_u5}
 	#dummy auth method
 	def login(self,_user,_pass):
 		for _x in self.users:
@@ -41,7 +42,7 @@ class UserDispatcher:
 			else:
 				return []
 class User:
-	def __init__(self,id,name,age,username,password,type,devices):
+	def __init__(self,id,name,age,username,password,type,devices,patients = ""):
 		self.id = id
 		self.name = name
 		self.username = username
@@ -49,5 +50,13 @@ class User:
 		self.age = age
 		self.type = type
 		self.devices = devices
+		self.patients = patients
+		
 	def toJson(self):
-		return json.dumps({"id":self.id,"name":self.name,"age":self.age,"type":self.type,"devices":self.devices}, sort_keys=True, indent=4)
+		if(self.patients != None):
+			_patients = []
+			for _p in self.patients:
+				_patients.append(_p.name)
+			return json.dumps({"id":self.id,"name":self.name,"age":self.age,"type":self.type,"devices":self.devices,"patients":_patients}, sort_keys=True, indent=4)
+		else:
+			return json.dumps({"id":self.id,"name":self.name,"age":self.age,"type":self.type,"devices":self.devices,"patients":self.patients}, sort_keys=True, indent=4)

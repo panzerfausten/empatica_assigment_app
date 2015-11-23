@@ -28,6 +28,7 @@
                                     <th class="th_header">Password</th>
                                     <th class="th_header">Age</th>
                                     <th class="th_header">Type</th>
+                                    <th class="th_header">Patients</th>
                                     <th class="th_header">Devices</th>
                                     <th class="th_header">Sessions</th>
                                   </tr>
@@ -39,6 +40,13 @@
                                                 <th class="th_data"> {{_users[_user].password}}</th>
                                                 <th class="th_data"> {{_users[_user].age}}</th>
                                                 <th class="th_data"> {{_users[_user].type}}</th>
+                                                <th class="th_data"> 
+							{%for _patient in _users[_user].patients%}
+								{{_patient.name}}
+								------
+                                                        {% endfor %}
+					
+						</th>
                                                 <th class="th_data">
 
 							{%for _device in _users[_user].devices%}

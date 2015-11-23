@@ -1,0 +1,309 @@
+<html>
+	<head>
+	<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/cal-heatmap.css')}}"/>
+	<script src="{{ url_for('static', filename='js/cal-heatmap.min.js')}}"></script>
+	</head>		
+	<style>
+		#bar{
+			background:#A30732;
+			color:white;
+			height:40px;
+			font-size:20px;
+			box-shadow: 3px 3px 3px #888888;
+			width:100%;
+		}
+		#bar *{
+			padding-left:15px;
+			display: inline-block;
+			vertical-align: middle;
+			height:100%;
+		}
+		#bar #logo{
+			padding-top:5px;
+			font-weight: 100;
+		}
+		#bar #logout{
+			margin-right:0;
+			float:right;
+			height:25px;
+		}
+		#bar #logout #lb{
+			width:25px;
+			height:25px;
+			margin-top:7px;
+			cursor:pointer;
+			background: url("../../../static/logout.png");
+			background-repeat:no-repeat;
+			background-size: 25px 25px;
+		}	
+		#bar #logout #lb:hover{
+			width:25px;
+			height:25px;
+			margin-top:7px;
+			cursor:pointer;
+			background: url("../../../static/logout_white.png");
+			background-repeat:no-repeat;
+			background-size: 25px 25px;
+		}
+		body {
+			margin:0;
+			padding:0;
+			font-family: "Lato","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			background:#E3E1E1;
+			overflow:scroll;	
+		}	
+		.empaticabox_session, .empaticabox_session:visited, .empaticabox_session:hover, .empaticabox_session:active {
+		  color: black;
+		}
+		#sessions_link, #sessions_link:visited, #sessions_link:hover, #sessions_link:active {
+                  	color: #D6D6D6;
+                        margin-top:8px;
+                        font-size:large;
+                        text-decoration:none;
+		}
+		.empaticabox_session{
+			text-decoration:none;
+			background:white;
+			box-shadow: 3px 3px 3px #888888;
+			border-radius:5px;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+			margin-top:15px;
+		}
+		.empaticabox_session *{
+			text-align:center;
+			margin-left: auto;
+			margin-right: auto;
+			display:block;
+		}
+		.empaticabox_feed_title {
+			padding-top:5px;
+			height:35px;
+		}
+		.empaticabox_session input{
+			width:70%;
+			height:35px;
+			font-size:large;
+		}
+		.empaticabutton{
+			background:#A30732;
+			height:25px;
+			width:55px;
+			color:white;
+			border-radius:1px;
+			box-shadow:1px 1px 1px #888888;
+			margin-right:53px;
+			-webkit-user-select: none;  
+			-moz-user-select: none;    
+			-ms-user-select: none;      
+			user-select: none;
+		}
+		.empaticabutton:hover{
+			background:#BC204B;
+			cursor:pointer;
+		}
+		.empaticabox_session .empaticabox_session_maincontainer{
+			height:80px;
+		}	
+		.empaticabox_session:hover{
+			background-color:#BC204B;
+			color:white;
+			cursor:pointer;
+
+		}
+		.empaticabox_session .empaticabox_session_maincontainer .empaticabox_session_mainData1{
+			float:left;
+			width:50%;
+			padding-top:15%;
+			font-size:xx-large;
+			text-align:center;
+			display:inline;
+			text-decoration:none;
+		}
+		.empaticabox_session .empaticabox_session_maincontainer .empaticabox_session_mainData1 * {
+		}
+		.empaticabox_session .empaticabox_session_maincontainer .empaticabox_session_mainData2{
+			width:40%;
+			float:right;
+			font-size:xx-large;
+			padding-top:3%;
+			display:inline;
+			text-decoration:none;
+		}
+		.empaticabox_session .empaticabox_session_statistics * {
+			display:inline;
+		}
+		.empaticabox_session .empaticabox_session_statistics{
+			margin-bottom:0;
+			margin: 50px auto -155px; 
+			width:100%;
+			color:gray;
+		}
+		.empaticabox_feed_container{
+			margin-left:auto;
+			margin-right:auto;
+			width:70%;
+			float:right;
+			overflow:scroll;
+
+		}
+		.empaticabox_session_date{
+			font-size:small;
+			margin-top:15px;
+		}	
+		.userdata{
+			float:left;
+			width:30%;
+			overflow:scroll;
+		}	
+		.userdata *{
+			margin-left:15px;
+			margin-top:15px;
+			overflow:hidden;
+		}
+		.userdata #userdata_name{
+			font-size:xx-large;
+		}
+		.empaticabox_session_date, .empaticabox_session_title{
+			margin-left: auto;
+			margin-right: auto;
+			width:350px;
+		}
+		.empaticabox_session_title{
+			font-size:xx-large;
+		}
+		#content{
+			overflow:scroll;	
+		}
+		#bar #logo img{
+			height:25px;
+			margin-right:5px;
+		}
+                #userdata_sessionMetadata{
+                        font-weight: bold;
+                }
+                #userdata_sessionMetadata div{
+                        font-weight: normal;
+                }
+
+	</style>
+	<body>
+		<header id="bar">
+			<span id="logo"><img src="../../../static/empatica_logo.png" width="25" height="25"/>Empatica Dashboard</span>
+			<a id="sessions_link" href="">Patients</a>
+			<span id="logout"><a href="../../../" id="lb"></a></span>
+		 </header>
+		<div id="content">
+			<div class="userdata">
+				<div id="userdataHolder">
+					<img src="{{ url_for('static', filename='doctor.png')}}"/>
+					<div id="userdata_name">{{_doctor.name}}</div>
+					<div id="userdata_sessionMetadata">Patients: 
+						{%for patient in _doctor.patients %}
+							<div><a href="patient/{{patient.id}}">{{ patient.name}} </a></div>
+						{%endfor%}
+					</div>
+				</div>
+			</div>
+		
+			<div class="empaticabox_feed_container">
+				</br>
+				</br>
+				</br>
+				</br>
+				<div style="text-align:center; margin-top:25%;">Please click on a patient to start. </div>
+			</div>
+<script type="text/javascript">
+	function goto(_data,_key){
+		_userID = {{_patientID}}
+		for (k  in _data){
+                        if(_data[k].value == _key){
+                                window.open("../app/user/"+_userID+"/sessions/"+ _data[k].sessionId);
+                        }
+                }
+	}
+var parser = function(data) {
+	var stats = {};
+	var _date = "";
+	for (var d in data) {	
+		stats[data[d].date] = data[d].value;
+	}
+	for (s in stats){
+		//alert(s);
+	}
+	return stats;
+};
+</script>
+<script type="text/javascript">
+	var _data = {{_hm_hr|safe}}
+	var cal = new CalHeatMap("#cal-heatmap");
+    	cal.init({
+        start: new Date(2015, 7, 1),
+        end: new Date(2015, 10, 15),
+	data: _data,
+	scale: [40, 60 ],
+        range: 5, // Number of days to display
+        domain: "month", // Display days
+        subDomain: "day", // Split each day by hours
+        browsing: true, // Enable browsing
+	afterLoadData: parser,
+        afterLoadNextDomain: function (start, end) {
+            alert("You just loaded a new domain starting on " + start + " and ending on " + end);
+        },
+	onClick: function(a,b,c){
+		goto(_data,b);
+	}
+    });
+</script>
+<script type="text/javascript">
+	var _data = {{_hm_eda|safe}}
+	var cal = new CalHeatMap("#cal-heatmap_eda");
+    	cal.init({
+        start: new Date(2015, 7, 1),
+        end: new Date(2015, 10, 15),
+	data: _data,
+	scale: [40, 60 ],
+        range: 5, // Number of days to display
+        domain: "month", // Display days
+        subDomain: "day", // Split each day by hours
+        browsing: true, // Enable browsing
+	afterLoadData: parser,
+        afterLoadNextDomain: function (start, end) {
+            alert("You just loaded a new domain starting on " + start + " and ending on " + end);
+        },
+	onClick: function(a,b,c){
+		goto(_data,b);
+	}
+    });
+</script>
+<script type="text/javascript">
+	var _data = {{_hm_temp|safe}}
+	var cal = new CalHeatMap("#cal-heatmap_temp");
+    	cal.init({
+        start: new Date(2015, 7, 1),
+        end: new Date(2015, 10, 15),
+	data: _data,
+	scale: [40, 60 ],
+        range: 5, // Number of days to display
+        domain: "month", // Display days
+        subDomain: "day", // Split each day by hours
+        browsing: true, // Enable browsing
+	afterLoadData: parser,
+        afterLoadNextDomain: function (start, end) {
+            alert("You just loaded a new domain starting on " + start + " and ending on " + end);
+        },
+
+	onClick: function(a,b,c){
+		goto(_data,b);
+	}
+
+    });
+	
+</script>
+		
+		</div>
+	</body>
+	</html>

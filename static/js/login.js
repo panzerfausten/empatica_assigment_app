@@ -10,6 +10,11 @@ function handlePatient(data){
 		window.location = "app/support";
 
 	}
+
+	if(_data.type == "doctor"){
+		window.location = "app/doctor/"+_data.id;
+
+	}
 	if(_data.type == "god"){
 		window.location = "app/god";
 

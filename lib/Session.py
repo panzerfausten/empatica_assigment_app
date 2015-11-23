@@ -91,6 +91,19 @@ class Session:
 				_session["session"]["statistics"]["HR_avg"] =  sum(_avgD) / len(_avgD)
 		else:
 			_session["session"]["statistics"]["HR_avg"] = -1 #if there is no HR file return -1 
+
+		if ("TEMP" in self._filePaths):
+			with open("%s/%s" %(self._sessionPath,self._filePaths["TEMP"])) as _signalFile:
+				_avgD = []
+				_lines = _signalFile.readlines()
+				for _x in range (self.cutLine("TEMP"), len(_lines),120): #probe each 2 mins
+					_dataline = _lines[_x][:-1].split(",")
+					_floatline = map(float,_dataline)
+					_avgD.append(_floatline[0])
+				print sum(_avgD) / len(_avgD)
+				_session["session"]["statistics"]["TEMP_avg"] =  sum(_avgD) / len(_avgD)
+		else:
+			_session["session"]["statistics"]["TEMP_avg"] = -1 #if there is no TEMP file return -1 
 		return _session
 	def checkSessionStatus(self):
 		#signals missing?
