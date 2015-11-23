@@ -3,24 +3,25 @@ Empatica &lt;3 Assigment app.
 
 This is my assigment app for the Empatica <3 people team.
 You can see a working sample at http://panzerfausten.pythonanywhere.com
-Instructions:
+#Instructions:
   
-  Installing:
-    grab the code:
+
+##Installing:
+    ###grab the code
 	Just clone the code from this repository! 
 		git clone git@github.com:panzerfausten/empatica_assigment_app.git
-    libs:
+    ###libs
  	First make sure have flask installed. This is the only extra library needed.
 	To install flask you can use your package manager
-		linux: sudo apt-get instal python-flask in ubuntu or sudo zypper install python-flask in openSuSE 
-	macOS:	sudo pip install Flask (sometimes you get linking troubles in mac after installation. You can use ln for this)
-    deploying:
-    	On your PC:
+	*linux: sudo apt-get instal python-flask in ubuntu or sudo zypper install python-flask in openSuSE 
+	*macOS:	sudo pip install Flask (sometimes you get linking troubles in mac after installation. You can use ln for this)
+
+    ###deploying
+    	*On your PC:
 		If you decide to run it on yout PC just do:
 			python  main.py
 		This will start the server at:  http://127.0.0.1:5000/. Just open your browser and head that direction :)
-    
-    	On pythonanywhere:
+    	*On pythonanywhere:
 		If you want to run in on the cloud  (THE CLOUD!  https://www.youtube.com/watch?v=8cp_uwr-7lY)
 		*Create an account at pythonanywhere.com
 		*Create a new app on your domain by going to web tab -> add a new web app, d select "flask" with python 2.7 and hit next.
@@ -38,14 +39,20 @@ Instructions:
 		If not, please check the Error log file at the Log files section
 
 		
-    using:
+    ###using
 	This app does not uses any DBMS. Instead uses a dummy authentication method (I did this to avoid extra configuration :P)
 	the available users, passwords and roles are:
-		dmiranda@empatica.com	pwd123	patient
-		aboj@empatica.com	bojo	patient
-		mike@empatica.com	rodri	support
-		god@empatica.com	dioeilmiopastore	god
-		gfreeman@empatica.com	wololo	doctor
+		---------------------------------------|
+		|dmiranda@empatica.com|pwd123|patient|
+		|---------------------------------------|
+		|aboj@empatica.com|bojo|patient|
+		|---------------------------------------|
+		|mike@empatica.com|rodri|support|
+		|---------------------------------------|
+		|god@empatica.com|dioeilmiopastore|god|
+		|---------------------------------------|
+		|gfreeman@empatica.com|wololo|doctor|
+		|---------------------------------------|
 	Webpages are not protected so you can see them if you have the links. 
     
 
