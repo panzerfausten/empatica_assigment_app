@@ -56,6 +56,11 @@ the available users, passwords and roles are:
 | god@empatica.com | dioeilmiopastore      |    god |
 |gfreeman@empatica.com|wololo|doctor|
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 Webpages are not protected so you can see them if you have the links. 
 
