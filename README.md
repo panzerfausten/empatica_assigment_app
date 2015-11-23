@@ -57,8 +57,9 @@ the available users, passwords and roles are:
 | gfreeman@empatica.com | wololo           | doctor     |
 | god@empatica.com      | dioeilmiopastore | god        |
 
-Webpages are not protected so you can see them if you have the links. 
-
+##issues
+*Webpages are not protected so you can see them if you have the links. 
+*The app was only tested on firefox, please use it :D
 
 And that's all. Hope you like it :)
 
