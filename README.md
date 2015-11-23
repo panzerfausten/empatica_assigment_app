@@ -18,16 +18,16 @@ To install flask you can use your package manager
 >*macOS:	sudo pip install Flask (sometimes you get linking troubles in mac after installation. You can use ln for this)
 
 ##deploying  
-*On your PC:  
+###On your PC:  
 If you decide to run it on yout PC just do:  
 >python  main.py  
 
 This will start the server at:  http://127.0.0.1:5000/. Just open your browser and head that direction :)
 
-*On pythonanywhere:  
+###On pythonanywhere:  
 If you want to run in on the cloud  (THE CLOUD! https://www.youtube.com/watch?v=8cp_uwr-7lY)  
 *Create an account at pythonanywhere.com  
-*Create a new app on your domain by going to web tab -> add a new web app, d select "flask" with python 2.7 and hit next.  
+*Create a new app on your domain by going to web tab -> add a new web app, select "flask" with python 2.7 and hit next.  
 *Create a zip file with the cloned repository   
 *Go back to the files tab in  your dashboard at pythonanywhere.com and upload your file. This step may take some time so go with your family and have some quality time.  
 *After some minutes come back (you still have to work) and select "open bash console here"  
@@ -48,19 +48,14 @@ If not, please check the Error log file at the Log files section
 This app does not uses any DBMS. Instead uses a dummy authentication method (I did this to avoid extra configuration :P)  
 
 the available users, passwords and roles are:
-| Username        | Password           | role  |
-| ------------- |:-------------:| -----:|
-| dmiranda@empatica.com      | pwd123 | patient |
-| aboj@empatica.com     | bojo      |   patient|
-| mike@empatica.com | rodri      |    support |
-| god@empatica.com | dioeilmiopastore      |    god |
-|gfreeman@empatica.com|wololo|doctor|
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Username              | Password         | Role       |
+| --------------------- |:----------------:| ----------:|
+| dmiranda@empatica.com | pwd123           | patient    |
+| aboj@empatica.com     | bojo             | patient    |
+| mike@empatica.com     | rodri            | support    |
+| gfreeman@empatica.com | wololo           | doctor     |
+| god@empatica.com      | dioeilmiopastore | god        |
 
 Webpages are not protected so you can see them if you have the links. 
 
